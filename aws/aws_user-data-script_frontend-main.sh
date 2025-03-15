@@ -9,7 +9,7 @@ export CONFIG_REPOSITORY_ENVFILE_PATH="config/frontend-main.env"
 export DOCKER_IMAGE_PATH="ohretry/bagulbagul-frontend-main"
 
 #실행권한 부여
-chmod +x ./amazonlinux2023_init_docker.sh ./amazonlinux2023_init_gpg.sh ./amazonlinux2023_init_openssl.sh ./amazonlinux2023_init_git-crypt.sh ./amazonlinux2023_init_swapfile.sh ./clone-decrypt_config-repository.sh
+chmod +x ./amazonlinux2023_init_docker.sh ./amazonlinux2023_init_gpg.sh ./amazonlinux2023_init_openssl.sh ./amazonlinux2023_init_git-crypt.sh ./amazonlinux2023_init_swapfile_4GB.sh ./clone-decrypt_config-repository.sh
 #docker 설치
 echo "================ 도커 설치 ================"
 source ./amazonlinux2023_init_docker.sh
@@ -23,8 +23,8 @@ source ./amazonlinux2023_init_openssl.sh
 echo "================ git-crypt 설치 ================"
 source ./amazonlinux2023_init_git-crypt.sh
 #swapfile 2GB 설정
-echo "================ 스왑메모리 2GB 설정 ================"
-source ./amazonlinux2023_init_swapfile.sh
+echo "================ 스왑메모리 4GB 설정 ================"
+source ./amazonlinux2023_init_swapfile_4GB.sh
 
 #config 레포지토리를 clone하고 git-crypt 복호화
 echo "================ Config 레포지토리 클론 & 복호화 ================"
