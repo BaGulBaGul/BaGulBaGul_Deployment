@@ -9,26 +9,25 @@ export CONFIG_REPOSITORY_ENVFILE_PATH="config/frontend-main.env"
 export DOCKER_IMAGE_PATH="ohretry/bagulbagul-frontend-main"
 
 #실행권한 부여
-chmod +x ./scripts/amazonlinux2023_init_docker.sh ./scripts/amazonlinux2023_init_gpg.sh ./scripts/amazonlinux2023_init_openssl.sh ./scripts/amazonlinux2023_init_git-crypt.sh ./scripts/amazonlinux2023_init_swapfile_4GB.sh ./scripts/clone-decrypt_config-repository.sh
+chmod +x ./scripts/amazonlinux2023_init_docker.sh ./scripts/amazonlinux2023_init_swapfile_2GB.sh
 #docker 설치
 echo "================ 도커 설치 ================"
 source ./scripts/amazonlinux2023_init_docker.sh
-#gpg 설치, gpg-agent 시작
-echo "================ gpg 설정 ================"
-source ./scripts/amazonlinux2023_init_gpg.sh
-#openssl 설치
-echo "================ openssl 설치 ================"
-source ./scripts/amazonlinux2023_init_openssl.sh
-#git-crypt 설치
-echo "================ git-crypt 설치 ================"
-source ./scripts/amazonlinux2023_init_git-crypt.sh
 #swapfile 2GB 설정
 echo "================ 스왑메모리 4GB 설정 ================"
 source ./scripts/amazonlinux2023_init_swapfile_4GB.sh
 
 #config 레포지토리를 clone하고 git-crypt 복호화
 echo "================ Config 레포지토리 클론 & 복호화 ================"
-./scripts/clone-decrypt_config-repository.sh
+docker run \
+-v .:/home \
+-e CONFIG_REPOSITORY_GITCRYPT_GPG_PRIVATEKEY="$CONFIG_REPOSITORY_GITCRYPT_GPG_PRIVATEKEY" \
+-e CONFIG_REPOSITORY_ADDRESS="$CONFIG_REPOSITORY_ADDRESS" \
+-e CONFIG_REPOSITORY_NAME="$CONFIG_REPOSITORY_NAME" \
+ohretry/clone-decrypt_config-repository
+
+#종료된 컨테이너 삭제
+docker container prune -f
 
 ###프론트엔드 서버 실행
 echo "================ 프론트엔드 서버 실행 ================"
