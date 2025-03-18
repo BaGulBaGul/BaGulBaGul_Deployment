@@ -9,26 +9,26 @@ export CONFIG_REPOSITORY_ENVFILE_PATH="config/backend-main.env"
 export DOCKER_IMAGE_PATH="ohretry/bagulbagul-backend-main"
 
 #실행권한 부여
-chmod +x ./amazonlinux2023_init_docker.sh ./amazonlinux2023_init_ssh.sh ./amazonlinux2023_init_gpg.sh ./amazonlinux2023_init_openssl.sh ./amazonlinux2023_init_git-crypt.sh ./amazonlinux2023_init_swapfile_2GB.sh ./clone-decrypt_config-repository.sh
+chmod +x ./scripts/amazonlinux2023_init_docker.sh ./scripts/amazonlinux2023_init_ssh.sh ./scripts/amazonlinux2023_init_gpg.sh ./scripts/amazonlinux2023_init_openssl.sh ./scripts/amazonlinux2023_init_git-crypt.sh ./scripts/amazonlinux2023_init_swapfile_2GB.sh ./scripts/clone-decrypt_config-repository.sh
 #docker 설치
 echo "================ 도커 설치 ================"
-source ./amazonlinux2023_init_docker.sh
+source ./scripts/amazonlinux2023_init_docker.sh
 #gpg 설치, gpg-agent 시작
 echo "================ gpg 설정 ================"
-source ./amazonlinux2023_init_gpg.sh
+source ./scripts/amazonlinux2023_init_gpg.sh
 #openssl 설치
 echo "================ openssl 설치 ================"
-source ./amazonlinux2023_init_openssl.sh
+source ./scripts/amazonlinux2023_init_openssl.sh
 #git-crypt 설치
 echo "================ git-crypt 설치 ================"
-source ./amazonlinux2023_init_git-crypt.sh
+source ./scripts/amazonlinux2023_init_git-crypt.sh
 #swapfile 2GB 설정
 echo "================ 스왑메모리 2GB 설정 ================"
-source ./amazonlinux2023_init_swapfile_2GB.sh
+source ./scripts/amazonlinux2023_init_swapfile_2GB.sh
 
 #config 레포지토리를 clone하고 git-crypt 복호화
 echo "================ Config 레포지토리 클론 & 복호화 ================"
-./clone-decrypt_config-repository.sh
+./scripts/clone-decrypt_config-repository.sh
 
 ###백엔드 서버 실행
 echo "================ 백엔드 서버 실행 ================"
